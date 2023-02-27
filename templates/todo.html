@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="intro mt-5 d-flex justify-content-center">
+  <h1>Your Todo list</h1>
+</div>
+<div class="log-out">
+  <a href="{{ url_for('logout') }}"><img src="{{ url_for('static', filename='images/log_out.png') }}"></a>
+</div>
+<table class="list table mt-5">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Priority</th>
+      <th>Task</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for todo in todos %}
+    {% if todo.user_id == current_user.id %}
+      <tr>
+        <td>{{ todo.time }}</td>
+        <td>{{ todo.priority }}</td>
+        <td>{{ todo.task }}</td>
+        <td>{{ todo.location }}</td>
+        <td><a class="cross" href="{{ url_for('delete', id=todo.id) }}">❌</a></td>
+      </tr>
+    {% endif %}
+  {% endfor %}
+
+  <tr>
+    <form method="POST" action="{{ url_for('todo') }}">
+      <td><input type="time" name="time"></td>
+      <td>
+          <select name="priority">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+              <option value="None">None</option>
+          </select>
+      </td>
+      <td><input type="text" name="task"></td>
+      <td><input type="text" name="location"></td>
+      <td><input class="submit" type="submit" value="Submit"></td>
+    </form>
+
+  </tr>
+  </tbody>
+</table>
+
+
+{% endblock %}

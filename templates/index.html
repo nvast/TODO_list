@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="d-flex justify-content-center welcome intro">Welcome to my Todo list</h1>
+
+<div class="d-flex justify-content-center">
+<a class="mr-5 mt-5" href="{{ url_for('login') }}"><h2 class="intro log">Login</h2></a>
+<h2 class="mt-5 intro">|</h2>
+<a class="ml-5 mt-5" href="{{ url_for('register') }}"><h2 class="intro log">Register</h2></a>
+    </div>
+{% endblock %}
